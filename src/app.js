@@ -3,13 +3,11 @@ const { userAuth } = require("./middlewares/userAuth");
 const app = express();
 const port = 5000;
 
-app.use("/user", userAuth);
-
-  app.delete("/user", (rq, res) => {
-    res.send("all user data deleted.");
-  });
 app.get("/user", (rq, res) => {
-  res.send("all user data sent.");
+  throw new Error("User not found");
+});
+app.use((err, req, res, next) => {
+  res.status(500).send({ error: "something went wrong" });
 });
 
 app.listen(port, () => {
