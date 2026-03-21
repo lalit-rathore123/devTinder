@@ -28,7 +28,9 @@ app.delete("/user/:id", (req, res) => {
   res.send(`User with id ${req.params.id} deleted successfully`);
 });
 
-
+app.get("/test", (req, res) => {
+  res.send("This is a test route");
+});
 
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
