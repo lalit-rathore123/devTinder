@@ -41,6 +41,33 @@ const validatorSignUp = (req) => {
   }
 };
 
+const profileEditValidator = (req) => {
+  try {
+    const allowedFields = [
+      "firstName",
+      "lastName",
+      "age",
+      "gender",
+      "skill",
+      "about",
+    ];
+
+    const isValidFields = Object.keys(req.body).every((field) =>
+      allowedFields.includes(field),
+    );
+    if (!isValidFields) {
+      throw new Error("you are editing invalid fields");
+    }
+    return isValidFields;
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   validatorSignUp,
+  profileEditValidator
 };

@@ -70,18 +70,11 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-authRouter.delete("/logout", userAuth, async (req, res) => {
-  try {
-    res.clearCookie("token");
-    res.status(200).json({
-      message: "logout successfully !",
-    });
-  } catch (error) {
-    res.status(500).json({
-      meassage: "something went!",
-      error: error.message,
-    });
-  }
+authRouter.post("/logout", async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "logout successfully !",
+  });
 });
 
 module.exports = {
