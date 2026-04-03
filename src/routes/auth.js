@@ -61,9 +61,14 @@ authRouter.post("/login", async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + 24 * 3600000),
     });
-    res.status(200).send("login successfully !");
+    res.status(200).json({
+      success: true,
+      message: "login successfully !",
+      data: user,
+    });
   } catch (error) {
     res.status(500).json({
+      success: false,
       message: "Something went wrong!",
       error: error.message,
     });
