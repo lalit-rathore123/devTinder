@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const SECRET = "305devTinder901@";
 
 const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-    const isAuthenticatedToken = await jwt.verify(token, SECRET);
+    const isAuthenticatedToken = await jwt.verify(
+      token,
+      process.env.JWT_SECRET,
+    );
 
     const { id } = isAuthenticatedToken;
     if (!id) {

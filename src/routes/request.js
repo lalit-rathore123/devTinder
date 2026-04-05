@@ -3,6 +3,7 @@ const { userAuth } = require("../middlewares/userAuth");
 const User = require("../models/user");
 const { ConnectionRequest } = require("../models/connectionRequest");
 const requestRouter = express.Router();
+const sendEmail = require("../utils/sendEmail");
 
 requestRouter.post(
   "/sendConnectionReq/:status/:toUserId",
@@ -53,7 +54,9 @@ requestRouter.post(
         status,
       });
 
-      await createReq.save();
+      // await createReq.save();
+      const sendEmailRes = await sendEmail.run();
+      console.log(sendEmailRes);
 
       res.status(201).json({
         success: true,
@@ -88,7 +91,7 @@ requestRouter.post(
         _id: reqUserId,
         status: "interested",
         toUserId: loggedInUserId,
-      })
+      });
 
       if (!isRequestExist) {
         return res.status(400).json({

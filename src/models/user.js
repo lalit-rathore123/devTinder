@@ -64,9 +64,10 @@ const UserSchema = new Schema(
 );
 
 UserSchema.methods.getJwtToken = async function () {
-  const SECRET = "305devTinder901@";
   const user = this;
-  const token = await jwt.sign({ id: user._id }, SECRET, { expiresIn: "1d" });
+  const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
   return token;
 };
 
