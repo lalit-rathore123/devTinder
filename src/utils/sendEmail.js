@@ -30,8 +30,8 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
 
 const run = async () => {
   const sendEmailCommand = createSendEmailCommand(
-    "recipient@example.com",
-    "sender@example.com",
+    process.env.RECIPIENT_EMAIL,
+    process.env.SENDER_EMAIL,
   );
 
   try {

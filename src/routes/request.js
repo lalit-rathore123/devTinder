@@ -55,8 +55,7 @@ requestRouter.post(
       });
 
       await createReq.save();
-      const sendEmailRes = await sendEmail.run();
-      console.log(sendEmailRes);
+      const sendEmailRes = await sendEmail.run(); 
 
       res.status(201).json({
         success: true,

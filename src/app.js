@@ -1,7 +1,6 @@
 const express = require("express");
 require("colors");
 const app = express();
-const port = 5000;
 const connectDB = require("./config/dataBase");
 const cookieParser = require("cookie-parser");
 const { authRouter } = require("./routes/auth");
@@ -29,8 +28,8 @@ app.use("/", requestRouter);
 connectDB()
   .then(() => {
     console.log("dataBase is connected !".bgYellow);
-    app.listen(port, () => {
-      console.log(`app is listening on port ${port}`);
+    app.listen(process.env.PORT, () => {
+      console.log(`app is listening on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
